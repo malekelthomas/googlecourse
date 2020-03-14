@@ -32,7 +32,9 @@ with open(sys.argv[1], "r") as file:
 
 #print(per_user)
 sortedperusr = sorted(per_user.items(),key=operator.itemgetter(0))
+sortedperusr.insert(0, ("Username", "INFO", "ERROR"))
 print(sortedperusr)
 #print(errormsgs)
 sortederrs = sorted(errormsgs.items(),key=operator.itemgetter(1))
+sortederrs.insert(0, ("Error", "Count"))
 print(errormsgs)
