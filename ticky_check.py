@@ -3,6 +3,7 @@
 import operator
 import re
 import sys
+import csv
 
 errormsgs = {}
 per_user = {}
@@ -29,6 +30,7 @@ with open(sys.argv[1], "r") as file:
         errormsgs[error.group(1)]=1
       else:
         errormsgs[error.group(1)]+=1
+  file.close()
 
 #print(per_user)
 sortedperusr = sorted(per_user.items(),key=operator.itemgetter(0))
@@ -38,3 +40,14 @@ print(sortedperusr)
 sortederrs = sorted(errormsgs.items(),key=operator.itemgetter(1))
 sortederrs.insert(0, ("Error", "Count"))
 print(errormsgs)
+
+with open("user_statistics.csv", "w") as f:
+  for data in sortedperusr:
+    f.write("{}\n".format(data))
+  f.close()
+
+
+with open("error_message.csv", "w") as f:
+  for data in sortederrs:
+    f.write("{}\n".format(data))
+  f.close()
